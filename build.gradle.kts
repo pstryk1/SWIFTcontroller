@@ -20,6 +20,30 @@ repositories {
 }
 
 dependencies {
+
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(module = "junit") // Wyklucz JUnit 4, jeśli używasz JUnit 5
+	}
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+	testImplementation("io.mockk:mockk:1.13.4")
+
+
+
+
+	implementation("org.antlr:antlr4-runtime:4.9.1")
+
+
+
+	implementation("com.jsoizo:kotlin-csv-jvm:1.10.0")
+
+	implementation("com.h2database:h2")
+
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	//implementation("mysql:mysql-connector-java")
+	implementation("org.hibernate.orm:hibernate-core:6.0.0.Final")
+
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
