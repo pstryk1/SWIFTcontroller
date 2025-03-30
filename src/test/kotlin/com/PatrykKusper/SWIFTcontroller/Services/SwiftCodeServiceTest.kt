@@ -17,7 +17,6 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
@@ -84,36 +83,7 @@ class SwiftCodeServiceTest {
 
  @Test
  fun `should return country swift codes response when swift codes list is not empty`() {
-  // Given
-//  val countryISO2code = "PL"
-//  val swiftCodes = listOf(
-//   SwiftCodeDataClass(
-//    swiftCode = "SWIFT001",
-//    bankName = "Bank A",
-//    address = "Address A",
-//    iso = "PL",
-//    countryName = "Polska",
-//    isHeadquarter = false
-//   ),
-//   SwiftCodeDataClass(
-//    swiftCode = "SWIFT002",
-//    bankName = "Bank B",
-//    address = "Address B",
-//    iso = "PL",
-//    countryName = "Polska",
-//    isHeadquarter = true
-//   )
-//  )
-//  Mockito.`when`(swiftCodeService.getSwiftCodesByCountry(countryISO2code))
-//   .thenReturn(swiftCodes)
-//
-//  // When & Then
-//  mockMvc.perform(get("/v1/swift-codes/country/$countryISO2code:"))
-//   .andExpect(status().isOk)
-//   .andExpect(jsonPath("$.countryISO2").value("PL"))
-//   .andExpect(jsonPath("$.countryName").value("POLAND"))
-//   .andExpect(jsonPath("$.swiftCodes[0].bankName").value("Bank A"))
-//   .andExpect(jsonPath("$.swiftCodes[1].bankName").value("Bank B"))
+
 
      val countryISO2code = "PL"
 
