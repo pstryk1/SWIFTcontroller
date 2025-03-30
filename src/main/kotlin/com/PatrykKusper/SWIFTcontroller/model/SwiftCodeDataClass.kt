@@ -1,11 +1,11 @@
-package com.PatrykKusper.SWIFTcontroller
+package com.PatrykKusper.SWIFTcontroller.model
 
 import jakarta.persistence.*
 
 
 @Entity
 @Table(name = "swift_codes")
-data class SwiftCode(
+data class SwiftCodeDataClass(
     @Id
     val swiftCode: String,
 
@@ -20,8 +20,7 @@ data class SwiftCode(
 
     val isHeadquarter: Boolean,
 
-    // Relacja: tylko dla headquarter, lista oddziałów. Może być null dla branch.
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "headquarter_code", referencedColumnName = "swiftCode")
-    val branches: List<SwiftCode>? = null
+    val branches: List<SwiftCodeDataClass>? = null
 )

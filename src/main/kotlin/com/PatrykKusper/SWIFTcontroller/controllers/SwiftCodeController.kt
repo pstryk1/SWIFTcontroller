@@ -3,13 +3,10 @@ package com.PatrykKusper.SWIFTcontroller.controllers
 import com.PatrykKusper.SWIFTcontroller.Services.NotFoundException
 import com.PatrykKusper.SWIFTcontroller.Services.SwiftCodeImportService
 import com.PatrykKusper.SWIFTcontroller.Services.SwiftCodeService
-import com.PatrykKusper.SWIFTcontroller.SwiftCode
-import org.springframework.data.crossstore.ChangeSetPersister
+import com.PatrykKusper.SWIFTcontroller.model.SwiftCodeDataClass
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
-import java.io.InputStream
-import java.io.InputStreamReader
 
 @RestController
 @RequestMapping("/v1/swift-codes")
@@ -20,7 +17,6 @@ class SwiftCodeController(
     @GetMapping("/{swiftCode}")
     fun getSwiftCode(@PathVariable swiftCode: String): ResponseEntity<Any> {
         val swiftCodeEntity = swiftCodeService.getSwiftCode(swiftCode)
-            ?: throw NotFoundException("SWIFT code: $swiftCode can not be found.")
 
         return if (swiftCodeEntity.isHeadquarter) {
             val branches = swiftCodeService.getBranchesForHeadquarter(swiftCodeEntity)
@@ -60,12 +56,12 @@ class SwiftCodeController(
     fun getSwiftCodeByISO2(@PathVariable countryISO2code: String): ResponseEntity<Any> {
         val swiftCodes = swiftCodeService.getSwiftCodesByCountry(countryISO2code)
         if (swiftCodes.isEmpty()) {
-            throw NotFoundException("Nie znaleziono kodów SWIFT dla kraju: $countryISO2code")
+            throw NotFoundException("Swift code can not be found for country code: $countryISO2code")
         }
 
         val response = CountrySwiftCodesResponse(
             countryISO2 = countryISO2code.uppercase(),
-            countryName = swiftCodes.first().countryName, // Zakładamy, że wszystkie rekordy mają tę samą nazwę kraju
+            countryName = swiftCodes.first().countryName,
             swiftCodes = swiftCodes.map {
                 SwiftCodeResponse(
                     bankName = it.bankName,
@@ -81,7 +77,7 @@ class SwiftCodeController(
     }
 
     @PostMapping
-    fun addSwiftCode(@RequestBody request: SwiftCode): ResponseEntity<Map<String, String>> {
+    fun addSwiftCode(@RequestBody request: SwiftCodeDataClass): ResponseEntity<Map<String, String>> {
         swiftCodeService.addSwiftCode(request)
         return ResponseEntity.ok(mapOf("message" to "SWIFT code added successfully."))
     }

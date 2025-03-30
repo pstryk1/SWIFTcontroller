@@ -1,11 +1,9 @@
 package com.PatrykKusper.SWIFTcontroller.Services
 
-import com.PatrykKusper.SWIFTcontroller.SwiftCode
-import com.PatrykKusper.SWIFTcontroller.SwiftCodeParser
-import com.PatrykKusper.SWIFTcontroller.SwiftRepository
+import com.PatrykKusper.SWIFTcontroller.model.SwiftCodeDataClass
+import com.PatrykKusper.SWIFTcontroller.repository.SwiftRepository
 import org.springframework.stereotype.Service
 import java.io.InputStream
-import java.io.InputStreamReader
 
 
 @Service
@@ -14,10 +12,10 @@ class SwiftCodeImportService(
     private val parser: SwiftCodeParser
 ) {
 
-    fun importFromCsv(inputStream: InputStream): List<SwiftCode> {
+    fun importFromCsv(inputStream: InputStream): List<SwiftCodeDataClass> {
         val dtos = parser.parseCsv(inputStream)
         val swiftCodes = dtos.map { dto ->
-            SwiftCode(
+            SwiftCodeDataClass(
                 swiftCode = dto.swiftCode,
                 bankName = dto.bankName,
                 address = dto.address,

@@ -1,10 +1,10 @@
-package com.PatrykKusper.SWIFTcontroller
+package com.PatrykKusper.SWIFTcontroller.Services
 
 
 import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import org.springframework.stereotype.Component
 import java.io.InputStream
-import java.io.InputStreamReader
+
 
 
 data class SwiftCodeDTO(
